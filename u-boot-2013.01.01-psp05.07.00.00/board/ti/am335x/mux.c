@@ -87,7 +87,8 @@ static struct module_pin_mux mmc0_pin_mux_sk_evm[] = {
 	{OFFSET(mmc0_dat0), (MODE(0) | RXACTIVE | PULLUP_EN)},	/* MMC0_DAT0 */
 	{OFFSET(mmc0_clk), (MODE(0) | RXACTIVE | PULLUP_EN)},	/* MMC0_CLK */
 	{OFFSET(mmc0_cmd), (MODE(0) | RXACTIVE | PULLUP_EN)},	/* MMC0_CMD */
-	{OFFSET(spi0_cs1), (MODE(5) | RXACTIVE | PULLUP_EN)},	/* MMC0_CD */
+	//{OFFSET(spi0_cs1), (MODE(5) | RXACTIVE | PULLUP_EN)},	/* MMC0_CD */
+	{OFFSET(mcasp0_aclkx), (MODE(4) | RXACTIVE | PULLUP_EN)},/* MMC0_CD */
 	{-1},
 };
 
@@ -131,6 +132,14 @@ static struct module_pin_mux spi0_pin_mux[] = {
 
 static struct module_pin_mux gpio0_7_pin_mux[] = {
 	{OFFSET(ecap0_in_pwm0_out), (MODE(7) | PULLUDEN)},	/* GPIO0_7 */
+	{-1},
+};
+
+static struct module_pin_mux gpio_other_pin_mux[] = {
+	{OFFSET(gpmc_a0), (MODE(7) | RXACTIVE | PULLUP_EN)},  /* gpio1_16 */
+    {OFFSET(mii1_txd3), (MODE(7) | PULLUDEN)},            /* gpio0_16 lcd en */
+    {OFFSET(mcasp0_ahclkr), (MODE(7) | PULLUP_EN)},  /* gpio3_17 LCD pwm */
+    {OFFSET(mii1_rxdv), (MODE(7) | PULLUP_EN)},      /* gpio3_4 ecg en */
 	{-1},
 };
 
@@ -261,6 +270,7 @@ static unsigned short detect_daughter_board_profile(void)
 
 void enable_board_pin_mux(struct am335x_baseboard_id *header)
 {
+  #if 0
 	/* Do board-specific muxes. */
 	if (!strncmp(header->name, "A335BONE", HDR_NAME_LEN)) {
 		/* Beaglebone pinmux */
@@ -308,4 +318,8 @@ void enable_board_pin_mux(struct am335x_baseboard_id *header)
 		puts("Unknown board, cannot configure pinmux.");
 		hang();
 	}
+  #endif
+    configure_module_pin_mux(gpio_other_pin_mux);
+    configure_module_pin_mux(mmc0_pin_mux);
+    configure_module_pin_mux(nand_pin_mux);
 }

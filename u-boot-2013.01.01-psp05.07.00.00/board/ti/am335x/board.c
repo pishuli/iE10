@@ -51,6 +51,11 @@ static struct uart_sys *uart_base = (struct uart_sys *)DEFAULT_UART_BASE;
 /* GPIO that controls power to DDR on EVM-SK */
 #define GPIO_DDR_VTT_EN		7
 
+#define GPIO_LVDS_EN            16      /*GPIO(0, 16)*/
+#define GPIO_LVDS_PWM           113     /*GPIO(3, 17) 3*32+17=113*/
+#define GPIO_ECG_PWR            100     /*GPIO(3, 4)*/
+
+
 static struct ctrl_dev *cdev = (struct ctrl_dev *)CTRL_DEVICE_BASE;
 
 static struct am335x_baseboard_id __attribute__((section (".data"))) header;
@@ -82,8 +87,11 @@ static int __maybe_unused board_is_gp_evm(void)
 
 int board_is_evm_15_or_later(void)
 {
+  #if 0
 	return (!strncmp("A33515BB", header.name, 8) &&
 		strncmp("1.5", header.version, 3) <= 0);
+  #endif
+    return 1;
 }
 
 /*
@@ -543,7 +551,15 @@ void s_init(void)
 		gpio_request(GPIO_DDR_VTT_EN, "ddr_vtt_en");
 		gpio_direction_output(GPIO_DDR_VTT_EN, 1);
 	}
+	gpio_request(GPIO_LVDS_EN, "lvds_en");  //call the /drivers/gpio/omap_gpio.c
+    gpio_direction_output(GPIO_LVDS_EN, 1);
 
+    gpio_request(GPIO_LVDS_PWM, "lvds_pwm");
+    gpio_direction_output(GPIO_LVDS_PWM, 1);
+
+    gpio_request(GPIO_ECG_PWR, "ecg_pwr");
+    gpio_direction_output(GPIO_ECG_PWR, 1);
+  #if 0
 	if (board_is_evm_sk() || board_is_bone_lt())
 		config_ddr(303, MT41J128MJT125_IOCTRL_VALUE, &ddr3_data,
 			   &ddr3_cmd_ctrl_data, &ddr3_emif_reg_data);
@@ -553,6 +569,10 @@ void s_init(void)
 	else
 		config_ddr(266, MT47H128M16RT25E_IOCTRL_VALUE, &ddr2_data,
 			   &ddr2_cmd_ctrl_data, &ddr2_emif_reg_data);
+  #endif
+    config_ddr(303, MT41J512M8RH125_IOCTRL_VALUE, &ddr3_evm_data,
+			   &ddr3_evm_cmd_ctrl_data, &ddr3_evm_emif_reg_data);
+  puts("s_init end.\n");
 #endif
 }
 
