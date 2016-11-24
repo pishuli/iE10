@@ -349,7 +349,7 @@
 #define CONFIG_SPL_SERIAL_SUPPORT
 #define CONFIG_SPL_GPIO_SUPPORT
 #define CONFIG_SPL_YMODEM_SUPPORT
-#define CONFIG_SPL_NET_SUPPORT
+#undef  CONFIG_SPL_NET_SUPPORT
 #define CONFIG_SPL_NET_VCI_STRING	"AM335x U-Boot SPL"
 #undef  CONFIG_SPL_ETH_SUPPORT
 #undef  CONFIG_SPL_SPI_SUPPORT
@@ -370,22 +370,29 @@
 #define CONFIG_SYS_NAND_5_ADDR_CYCLE
 #define CONFIG_SYS_NAND_PAGE_COUNT	(CONFIG_SYS_NAND_BLOCK_SIZE / \
 					 CONFIG_SYS_NAND_PAGE_SIZE)
-#define CONFIG_SYS_NAND_PAGE_SIZE	2048
-#define CONFIG_SYS_NAND_OOBSIZE		64
-#define CONFIG_SYS_NAND_BLOCK_SIZE	(128*1024)
+#define CONFIG_SYS_NAND_PAGE_SIZE	4096  /*2048*/
+#define CONFIG_SYS_NAND_OOBSIZE		224   /*64*/
+#define CONFIG_SYS_NAND_BLOCK_SIZE	(128*4096)
 #define CONFIG_SYS_NAND_BAD_BLOCK_POS	NAND_LARGE_BADBLOCK_POS
 #define CONFIG_SYS_NAND_ECCPOS		{ 2, 3, 4, 5, 6, 7, 8, 9, \
-					 10, 11, 12, 13, 14, 15, 16, 17, \
-					 18, 19, 20, 21, 22, 23, 24, 25, \
-					 26, 27, 28, 29, 30, 31, 32, 33, \
-					 34, 35, 36, 37, 38, 39, 40, 41, \
-					 42, 43, 44, 45, 46, 47, 48, 49, \
-					 50, 51, 52, 53, 54, 55, 56, 57, }
+                                     10, 11, 12, 13, 14, 15, 16, 17, \
+                                     18, 19, 20, 21, 22, 23, 24, 25, \
+                                     26, 27, 28, 29, 30, 31, 32, 33, \
+                                     34, 35, 36, 37, 38, 39, 40, 41, \
+                                     42, 43, 44, 45, 46, 47, 48, 49, \
+                                     50, 51, 52, 53, 54, 55, 56, 57, \
+                                     58, 59, 60, 61, 62, 63, 64, 65, \
+                                     66, 67, 68, 69, 70, 71, 72, 73, \
+                                     74, 75, 76, 77, 78, 79, 80, 81, \
+                                     82, 83, 84, 85, 86, 87, 88, 89, \
+                                     90, 91, 92, 93, 94, 95, 96, 97, \
+                                     98, 99, 100, 101, 102, 103, 104, 105, \
+                                     106, 107, 108, 109, 110, 111, 112, 113,}
 
 #define CONFIG_SYS_NAND_ECCSIZE		512
 #define CONFIG_SYS_NAND_ECCBYTES	14
 
-#define CONFIG_SYS_NAND_ECCSTEPS	4
+#define CONFIG_SYS_NAND_ECCSTEPS	8 /*4*/
 #define	CONFIG_SYS_NAND_ECCTOTAL	(CONFIG_SYS_NAND_ECCBYTES * \
 						CONFIG_SYS_NAND_ECCSTEPS)
 
@@ -415,15 +422,15 @@
  */
 #define CONFIG_USB_MUSB_DSPS
 #define CONFIG_ARCH_MISC_INIT
-#define CONFIG_MUSB_GADGET
+#undef CONFIG_MUSB_GADGET
 #define CONFIG_MUSB_PIO_ONLY
 #define CONFIG_USB_GADGET_DUALSPEED
 #define CONFIG_USB_GADGET_VBUS_DRAW	2
 #define CONFIG_MUSB_HOST
 #define CONFIG_AM335X_USB0
 #define CONFIG_AM335X_USB0_MODE  MUSB_HOST
-#define CONFIG_AM335X_USB1
-#define CONFIG_AM335X_USB1_MODE  MUSB_PERIPHERAL
+#undef CONFIG_AM335X_USB1
+#undef CONFIG_AM335X_USB1_MODE  MUSB_PERIPHERAL
 
 #ifdef CONFIG_MUSB_HOST
 #define CONFIG_CMD_USB
@@ -468,23 +475,23 @@
 /* Unsupported features */
 #undef CONFIG_USE_IRQ
 
-#define CONFIG_CMD_NET
-#define CONFIG_CMD_DHCP
-#define CONFIG_CMD_PING
-#define CONFIG_DRIVER_TI_CPSW
-#define CONFIG_MII
-#define CONFIG_BOOTP_DEFAULT
-#define CONFIG_BOOTP_DNS
-#define CONFIG_BOOTP_DNS2
-#define CONFIG_BOOTP_SEND_HOSTNAME
-#define CONFIG_BOOTP_GATEWAY
-#define CONFIG_BOOTP_SUBNETMASK
-#define CONFIG_NET_RETRY_COUNT         10
-#define CONFIG_NET_MULTI
-#define CONFIG_PHY_GIGE
-#define CONFIG_PHYLIB
-#define CONFIG_PHY_ADDR			0
-#define CONFIG_PHY_SMSC
+#undef CONFIG_CMD_NET
+#undef CONFIG_CMD_DHCP
+#undef CONFIG_CMD_PING
+#undef CONFIG_DRIVER_TI_CPSW
+#undef CONFIG_MII
+#undef CONFIG_BOOTP_DEFAULT
+#undef CONFIG_BOOTP_DNS
+#undef CONFIG_BOOTP_DNS2
+#undef CONFIG_BOOTP_SEND_HOSTNAME
+#undef CONFIG_BOOTP_GATEWAY
+#undef CONFIG_BOOTP_SUBNETMASK
+#undef CONFIG_NET_RETRY_COUNT         10
+#undef CONFIG_NET_MULTI
+#undef CONFIG_PHY_GIGE
+#undef CONFIG_PHYLIB
+#undef CONFIG_PHY_ADDR			0
+#undef CONFIG_PHY_SMSC
 
 #define CONFIG_NAND
 /* NAND support */
