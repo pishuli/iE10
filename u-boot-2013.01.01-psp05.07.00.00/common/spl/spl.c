@@ -175,7 +175,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 #endif
 
 #ifdef CONFIG_SPL_BOARD_INIT
-	spl_board_init(); //by pishuli, gpmc,pll,usb initial
+	spl_board_init(); //by pishuli, gpmc,pll,usb initial
 #endif
 
 	boot_device = spl_boot_device();

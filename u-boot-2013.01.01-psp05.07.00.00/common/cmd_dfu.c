@@ -58,16 +58,20 @@ static int do_dfu(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 #ifdef CONFIG_TRATS
 	board_usb_init();
 #endif
-
+  #ifdef CONFIG_MUSB_GADGET
 	g_dnl_register(s);
+  #endif
 	while (1) {
 		if (ctrlc())
 			goto exit;
-
+      #ifdef CONFIG_MUSB_GADGET
 		usb_gadget_handle_interrupts();
+	  #endif
 	}
 exit:
+  #ifdef CONFIG_MUSB_GADGET
 	g_dnl_unregister();
+  #endif
 done:
 	dfu_free_entities();
 	free(env_bkp);
